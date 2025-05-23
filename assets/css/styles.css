@@ -75,6 +75,7 @@ body {
     box-shadow: 0 4px 6px var(--shadow-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    animation: fadeIn 0.5s ease-out forwards;
 }
 
 .skill-card:hover {
@@ -114,13 +115,14 @@ body {
     height: 10px;
     margin-top: 1rem;
     overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress {
     background-color: var(--secondary-color);
     height: 100%;
     border-radius: 10px;
-    transition: width 1s ease-in-out;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Colores específicos para cada habilidad */
@@ -139,8 +141,85 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.skill-card {
+/* Aplicar animaciones a los elementos principales */
+.navbar {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.header {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.section {
+    opacity: 0;
     animation: fadeIn 0.5s ease-out forwards;
+}
+
+.section:nth-child(1) { animation-delay: 0.2s; }
+.section:nth-child(2) { animation-delay: 0.4s; }
+.section:nth-child(3) { animation-delay: 0.6s; }
+
+.skills-container .skill-card:nth-child(1) { animation-delay: 0.3s; }
+.skills-container .skill-card:nth-child(2) { animation-delay: 0.4s; }
+.skills-container .skill-card:nth-child(3) { animation-delay: 0.5s; }
+.skills-container .skill-card:nth-child(4) { animation-delay: 0.6s; }
+.skills-container .skill-card:nth-child(5) { animation-delay: 0.7s; }
+.skills-container .skill-card:nth-child(6) { animation-delay: 0.8s; }
+.skills-container .skill-card:nth-child(7) { animation-delay: 0.9s; }
+.skills-container .skill-card:nth-child(8) { animation-delay: 1s; }
+
+.project-card {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.projects-container .project-card:nth-child(1) { animation-delay: 0.4s; }
+.projects-container .project-card:nth-child(2) { animation-delay: 0.6s; }
+
+.footer {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+    animation-delay: 0.8s;
+}
+
+.social-link {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.social-links .social-link:nth-child(1) { animation-delay: 1s; }
+.social-links .social-link:nth-child(2) { animation-delay: 1.2s; }
+
+.theme-toggle {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* Asegurar que las animaciones no se repitan */
+.section,
+.skill-card,
+.project-card,
+.footer,
+.social-link,
+.theme-toggle {
+    animation-fill-mode: forwards;
+}
+
+/* Ajustar la duración de las transiciones */
+.skill-card,
+.project-card,
+.progress-bar,
+.progress {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Transición suave para el cambio de tema */
+.skill-card,
+.project-card,
+.navbar,
+.theme-toggle {
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Responsive design */
@@ -293,14 +372,6 @@ body {
     }
 }
 
-/* Ajustar la duración de las transiciones */
-.skill-card,
-.project-card,
-.progress-bar,
-.progress {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* Estilos para el botón de tema */
 .theme-toggle {
     position: fixed;
@@ -324,8 +395,17 @@ body {
 
 .theme-toggle:hover {
     transform: scale(1.1);
-    background-color: var(--secondary-color);
-    color: var(--card-background);
+}
+
+/* Estilos específicos para el hover según el tema */
+[data-theme="light"] .theme-toggle:hover {
+    background-color: #2c3e50; /* Negro para el tema claro */
+    color: #ffffff; /* Luna blanca */
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background-color: #f1c40f; /* Amarillo para el tema oscuro */
+    color: #1a1a1a;
 }
 
 .theme-toggle i {
@@ -334,14 +414,6 @@ body {
 
 .theme-toggle:hover i {
     transform: rotate(360deg);
-}
-
-/* Transición suave para el cambio de tema */
-.skill-card,
-.project-card,
-.navbar,
-.theme-toggle {
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dynamic-message {
@@ -408,5 +480,86 @@ body[data-theme="dark"] .dynamic-message {
         height: 220px;
         width: 160px;
         margin: 1rem auto;
+    }
+}
+
+/* Estilos del Footer */
+.footer {
+    background-color: var(--card-background);
+    padding: 2rem 0;
+    margin-top: 1rem;
+    box-shadow: 0 -2px 10px var(--shadow-color);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background-color: var(--background-color);
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.social-link i {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover i {
+    transform: scale(1.2);
+}
+
+.social-link span {
+    font-weight: 500;
+}
+
+/* Colores específicos para cada enlace */
+.social-link[aria-label="GitHub"]:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.social-link[aria-label="Email"]:hover {
+    background-color: #ea4335;
+    color: #fff;
+}
+
+.copyright {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .social-links {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .footer-content {
+        padding: 0 1rem;
     }
 }
